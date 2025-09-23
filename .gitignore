@@ -1,0 +1,14 @@
+/target/
+/build/
+/.gradle/
+/out/
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+/.mvn/wrapper/maven-wrapper.jar
+**/logs/
+*.class
+*.jar
+.DS_Store
