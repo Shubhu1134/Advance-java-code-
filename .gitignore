@@ -12,3 +12,4 @@
 *.class
 *.jar
 .DS_Store
+/Projects/StrudentGradeCalc/target/
