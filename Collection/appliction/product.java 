@@ -1,0 +1,58 @@
+import java.util.*;
+class Product{
+    private String name;
+    public Product(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public String toString(){
+        return name;
+    }
+}
+
+class Category{
+    private String name;
+    ArrayList<Product> li=new ArrayList<>();
+    public Category(String name)
+    {
+        this.name=name;
+    }
+    public void add(Product c)
+    {
+        li.add(c);
+    }
+    public String getName(){
+        return this.name;
+    }
+    public ArrayList<Product> getList()
+    {
+        return li;
+    }
+}
+class Test{
+    public static void main(String args[])
+    {
+        Category c1=new Category("general");
+        Category c2=new Category("dalit");
+        Category c3=new Category("chourisya");
+
+        c1.add(new Product("thakur"));
+        c1.add(new Product("bharaman"));
+        c1.add(new Product("rajput"));
+
+        c2.add(new Product("chamar"));
+        c2.add(new Product("bhangi"));
+        c2.add(new Product("nai thakur"));
+
+        HashMap<String,ArrayList<Product>> hp= new HashMap<>();
+        hp.put(c1.getName(),cl.getList());
+
+
+        
+
+    }
+}
