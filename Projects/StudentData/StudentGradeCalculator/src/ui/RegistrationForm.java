@@ -5,17 +5,15 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class LoginForm extends JFrame {
+public class RegistrationForm extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
-    private JButton registerButton; // New button
+    private JButton registerButton;
 
-    public LoginForm() {
-        setTitle("Login");
-        setSize(400, 300);
+    public RegistrationForm() {
+        setTitle("Register");
+        setSize(350, 250);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JLabel userLabel = new JLabel("Username:");
@@ -34,49 +32,39 @@ public class LoginForm extends JFrame {
         passwordField.setBounds(140, 90, 150, 25);
         add(passwordField);
 
-        loginButton = new JButton("Login");
-        loginButton.setBounds(80, 150, 100, 30);
-        add(loginButton);
-
         registerButton = new JButton("Register");
-        registerButton.setBounds(200, 150, 100, 30);
+        registerButton.setBounds(120, 140, 100, 30);
         add(registerButton);
 
-        // Login action
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                authenticate();
-            }
-        });
-
-        // Register action
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                RegistrationForm regForm = new RegistrationForm();
-                regForm.setVisible(true);
+                registerUser();
             }
         });
     }
 
-    private void authenticate() {
+    private void registerUser() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
 
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields!");
+            return;
+        }
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(
-                     "SELECT * FROM users WHERE username=? AND password=?")) {
+                     "INSERT INTO users (username, password) VALUES (?, ?)")) {
 
             ps.setString(1, username);
             ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            ps.executeUpdate();
 
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(this, "Login successful!");
-                dispose();
-                new GradeCalculatorForm().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid credentials!");
-            }
+            JOptionPane.showMessageDialog(this, "Registration successful!");
+            dispose();
+
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            JOptionPane.showMessageDialog(this, "Username already exists!");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
