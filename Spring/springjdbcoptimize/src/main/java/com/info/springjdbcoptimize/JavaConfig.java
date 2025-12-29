@@ -22,7 +22,7 @@ public class JavaConfig {
    public DriverManagerDataSource getDataSource() {
 	   DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	   dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	   dataSource.setUrl("jdbc:mysql://localhost:3306/springdbjdbc");
+	   dataSource.setUrl("jdbc:mysql://localhost:3306/springdb");
 	   dataSource.setUsername("root");
 	   dataSource.setPassword("root");
 	   return dataSource;
