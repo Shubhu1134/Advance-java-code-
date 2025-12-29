@@ -10,7 +10,7 @@
     <body>
         <div align="center">
             <h1>Welcome to Spring MVC CRUD App</h1>
-            <h3>Hello Suryansh</h3>
+            <h3>Hello Shubham</h3>
             <p><a href="admin/login">Admin Login</a></p>
         </div>
     </body>
